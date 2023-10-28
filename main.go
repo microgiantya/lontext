@@ -8,6 +8,7 @@ import (
 )
 
 const (
+	p = "logger"
 	Version = "v0.0.1"
 )
 
