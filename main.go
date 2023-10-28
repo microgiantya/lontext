@@ -7,6 +7,10 @@ import (
 	"time"
 )
 
+const (
+	Version = "v0.0.1"
+)
+
 var (
 	_trace   = _level{"T", "\033[37m"}
 	_debug   = _level{"D", "\033[30m"}
