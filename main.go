@@ -8,8 +8,8 @@ import (
 )
 
 const (
-	p = "logger"
-	Version = "v0.0.4"
+	p       = "logger"
+	Version = "v0.0.0"
 )
 
 var (
@@ -116,11 +116,11 @@ func _log(v logType) {
 	}
 
 	if v.P == "" {
-		fmt.Printf("%s%s%s\n", v.Level.C, s, _default)
+		fmt.Printf("[%s] %s%s%s\n", Version, v.Level.C, s, _default)
 		return
 	}
 
-	fmt.Printf("%s%s: %s: %s%s\n", v.Level.C, v.Level.R, v.P, s, _default)
+	fmt.Printf("[%s] %s%s: %s: %s%s\n", Version, v.Level.C, v.Level.R, v.P, s, _default)
 }
 
 func T(p string, data interface{}) {
