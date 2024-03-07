@@ -8,11 +8,12 @@ import (
 )
 
 const (
-	p       = "logger"
-	Version = "v0.0.0"
+	p = "logger"
 )
 
 var (
+	Version = "v0.0.0"
+
 	_trace   = _level{"T", "\033[37m"}
 	_debug   = _level{"D", "\033[30m"}
 	_verbose = _level{"V", "\033[36m"}
