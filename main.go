@@ -211,7 +211,7 @@ func GetFromContext(ctx context.Context, key string) (s string) {
 	return
 }
 
-func GetKeyFromContext(ctx context.Context, key string) (s string) {
+func GetValueFromContext(ctx context.Context, key string) (s string) {
 	switch v := ctx.Value(key).(type) {
 	case *Helper:
 		s = v.Get()
@@ -338,7 +338,7 @@ func (t *Helper) Get() (s string) {
 	return
 }
 
-func (t *Helper) LogCurrentAction() (s string) {
+func (t *Helper) GetActionInfo() (s string) {
 	t.Lock()
 
 	s = fmt.Sprintf(`action: %s starting at: %s (%v);`, t.A, t.T.Format("2006-01-02 15:04:05"), time.Since(t.T))
