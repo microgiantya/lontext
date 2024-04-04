@@ -105,13 +105,11 @@ func _log(v logType) {
 			return
 		}
 		s = t.Error()
-		break
 	case string:
 		if t == "" {
 			return
 		}
 		s = t
-		break
 	default:
 		s = fmt.Sprintf("%+v", v.Data)
 	}
@@ -128,19 +126,39 @@ func T(p string, data interface{}) {
 	tCh <- logType{_trace, p, data}
 }
 
+func LogTrace(p string, data interface{}) {
+	T(p, data)
+}
+
 func D(p string, data interface{}) {
 	dCh <- logType{_debug, p, data}
+}
+
+func LogDebug(p string, data interface{}) {
+	D(p, data)
 }
 
 func V(p string, data interface{}) {
 	vCh <- logType{_verbose, p, data}
 }
 
+func LogVerbose(p string, data interface{}) {
+	V(p, data)
+}
+
 func I(p string, data interface{}) {
 	iCh <- logType{_info, p, data}
 }
 
+func LogInfo(p string, data interface{}) {
+	I(p, data)
+}
+
 func I_(p string, data interface{}) {
+	_log(logType{_info, p, data})
+}
+
+func LogInfoBypassLogLevel(p string, data interface{}) {
 	_log(logType{_info, p, data})
 }
 
@@ -148,20 +166,40 @@ func N(p string, data interface{}) {
 	nCh <- logType{_notice, p, data}
 }
 
+func LogNotice(p string, data interface{}) {
+	N(p, data)
+}
+
 func W(p string, data interface{}) {
 	wCh <- logType{_warning, p, data}
+}
+
+func LogWarning(p string, data interface{}) {
+	W(p, data)
 }
 
 func E(p string, data interface{}) {
 	eCh <- logType{_error, p, data}
 }
 
+func LogError(p string, data interface{}) {
+	E(p, data)
+}
+
 func E_(p string, data interface{}) {
 	_log(logType{_error, p, data})
 }
 
+func LogErrorBypassLogLevel(p string, data interface{}) {
+	E_(p, data)
+}
+
 func F(p string, data interface{}) {
 	fCh <- logType{_fatal, p, data}
+}
+
+func LogFatal(p string, data interface{}) {
+	F(p, data)
 }
 
 func GetFromContext(ctx context.Context, key string) (s string) {
@@ -170,7 +208,15 @@ func GetFromContext(ctx context.Context, key string) (s string) {
 		s = v.Get()
 		return
 	}
+	return
+}
 
+func GetKeyFromContext(ctx context.Context, key string) (s string) {
+	switch v := ctx.Value(key).(type) {
+	case *Helper:
+		s = v.Get()
+		return
+	}
 	return
 }
 
@@ -181,40 +227,39 @@ func SetToContext(ctx context.Context, key string, value string) {
 	}
 }
 
+func SaveKeyToContext(ctx context.Context, key string, value string) {
+	switch t := ctx.Value(key).(type) {
+	case *Helper:
+		t.Set(value)
+	}
+}
+
 func LogInit(fl float64) {
-	fNil := []int{}
-	fFill := []int{}
+	var fNil []int
+	var fFill []int
 
 	switch true {
-
 	case fl >= 7:
 		fNil = []int{}
 		fFill = []int{0, 1, 2, 3, 4, 5, 6, 7}
-		break
 	case fl >= 6:
 		fNil = []int{7}
 		fFill = []int{0, 1, 2, 3, 4, 5, 6}
-		break
 	case fl >= 5:
 		fNil = []int{6, 7}
 		fFill = []int{0, 1, 2, 3, 4, 5}
-		break
 	case fl >= 4:
 		fNil = []int{5, 6, 7}
 		fFill = []int{0, 1, 2, 3, 4}
-		break
 	case fl >= 3:
 		fNil = []int{4, 5, 6, 7}
 		fFill = []int{0, 1, 2, 3}
-		break
 	case fl >= 2:
 		fNil = []int{3, 4, 5, 6, 7}
 		fFill = []int{0, 1, 2}
-		break
 	case fl >= 1:
 		fNil = []int{2, 3, 4, 5, 6, 7}
 		fFill = []int{0, 1}
-		break
 	default:
 		fNil = []int{1, 2, 3, 4, 5, 6, 7}
 		fFill = []int{0}
@@ -282,16 +327,28 @@ type Helper struct {
 	A string
 }
 
+// LogCurrentAction
 func (t *Helper) Get() (s string) {
 	t.Lock()
 
-	s = fmt.Sprintf(`action: %s starting at: %s (%v);`, t.A, t.T.Format("2006-01-02 15:04:05"), time.Now().Sub(t.T))
+	s = fmt.Sprintf(`action: %s starting at: %s (%v);`, t.A, t.T.Format("2006-01-02 15:04:05"), time.Since(t.T))
 
 	t.Unlock()
 
 	return
 }
 
+func (t *Helper) LogCurrentAction() (s string) {
+	t.Lock()
+
+	s = fmt.Sprintf(`action: %s starting at: %s (%v);`, t.A, t.T.Format("2006-01-02 15:04:05"), time.Since(t.T))
+
+	t.Unlock()
+
+	return
+}
+
+// SetAction
 func (t *Helper) Set(s string) {
 	t.Lock()
 
@@ -299,7 +356,15 @@ func (t *Helper) Set(s string) {
 	t.A = s
 
 	t.Unlock()
-	return
+}
+
+func (t *Helper) SetAction(s string) {
+	t.Lock()
+
+	t.T = time.Now()
+	t.A = s
+
+	t.Unlock()
 }
 
 func init() {
