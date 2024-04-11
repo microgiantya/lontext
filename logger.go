@@ -40,7 +40,7 @@ func fixVersion(version string) (fixedVersion string) {
 func fixView(view loggerView) (fixedView loggerView) {
 	fixedView = view
 	if fixedView != loggerViewPlain && fixedView != loggerViewJSON {
-		fixedView = loggerViewJSON
+		fixedView = loggerViewPlain
 	}
 	return
 }

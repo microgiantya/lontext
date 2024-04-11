@@ -118,6 +118,7 @@ func TestNewDefaultLoggerWithCancel(t *testing.T) {
 			Severity:       7,
 			Version:        "v2.5.94",
 			UniqueIDPrefix: "apiV2",
+			View:           loggerViewJSON,
 		})
 		ctx2.LogEmergency("message")
 		ctx2.LogAlert("message")
