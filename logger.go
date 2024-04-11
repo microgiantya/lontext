@@ -66,6 +66,7 @@ func newLogger(ctx context.Context, params *loggerInitParams) (logger *Logger) {
 		go logger.receive()
 		logger.wg.Wait()
 	}
+	fmt.Println("check")
 	return
 }
 
@@ -161,6 +162,8 @@ func (t *Logger) Value(v any) any {
 }
 
 func (t *Logger) receive() {
+	fmt.Println("start receive")
+	defer fmt.Println("stop receive")
 	t.wg.Done()
 	for {
 		select {
