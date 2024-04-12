@@ -24,7 +24,7 @@ func newLoggerTransmissions(separate bool, veiw loggerView) (loggerTransmissions
 		for i := 0; i < 8; i++ {
 			loggerTransmission := &loggerTransmission{}
 			switch veiw {
-			case loggerViewJSON:
+			case LoggerViewJSON:
 				loggerTransmission.setLoggerFunc(showJSONLine)
 			default:
 				loggerTransmission.setLoggerFunc(showPlainLine)

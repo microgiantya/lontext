@@ -1,8 +1,8 @@
 package logger
 
 const (
-	loggerViewPlain = "plain"
-	loggerViewJSON  = "json"
+	LoggerViewPlain = "plain"
+	LoggerViewJSON  = "json"
 )
 
 type loggerView string
