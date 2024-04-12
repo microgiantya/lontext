@@ -84,6 +84,13 @@ func NewLoggerContext(ctx context.Context, params *LoggerInitParams) *Logger {
 	return newLogger(ctx, params)
 }
 
+func NewLoggerContextWithCancel(ctx context.Context, params *LoggerInitParams) (logger *Logger, cancel context.CancelFunc) {
+	params.separate = true
+	_ctx, cancel := context.WithCancel(ctx)
+	logger = newLogger(_ctx, params)
+	return
+}
+
 func NewCommonLoggerWithCancel(params *LoggerInitParams) (*Logger, context.CancelFunc) {
 	ctx, cancel := context.WithCancel(context.Background())
 	return newLogger(ctx, params), cancel
