@@ -45,7 +45,7 @@ func fixView(view loggerView) (fixedView loggerView) {
 	return
 }
 
-func newLogger(ctx context.Context, params *loggerInitParams) (logger *Logger) {
+func newLogger(ctx context.Context, params *LoggerInitParams) (logger *Logger) {
 	params.View = fixView(params.View)
 	params.Version = fixVersion(params.Version)
 	params.UniqueIDPrefix = fixUniqueIDPrefix(params.UniqueIDPrefix)
@@ -72,24 +72,24 @@ func newLogger(ctx context.Context, params *loggerInitParams) (logger *Logger) {
 	return
 }
 
-func NewLoggerWithCancel(params *loggerInitParams) (logger *Logger, cancel context.CancelFunc) {
+func NewLoggerWithCancel(params *LoggerInitParams) (logger *Logger, cancel context.CancelFunc) {
 	params.separate = true
 	ctx, cancel := context.WithCancel(context.Background())
 	logger = newLogger(ctx, params)
 	return
 }
 
-func NewLoggerContext(ctx context.Context, params *loggerInitParams) *Logger {
+func NewLoggerContext(ctx context.Context, params *LoggerInitParams) *Logger {
 	params.separate = true
 	return newLogger(ctx, params)
 }
 
-func NewCommonLoggerWithCancel(params *loggerInitParams) (*Logger, context.CancelFunc) {
+func NewCommonLoggerWithCancel(params *LoggerInitParams) (*Logger, context.CancelFunc) {
 	ctx, cancel := context.WithCancel(context.Background())
 	return newLogger(ctx, params), cancel
 }
 
-func NewCommonLoggerContext(ctx context.Context, params *loggerInitParams) *Logger {
+func NewCommonLoggerContext(ctx context.Context, params *LoggerInitParams) *Logger {
 	return newLogger(ctx, params)
 }
 

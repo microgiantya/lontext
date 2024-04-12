@@ -1,6 +1,6 @@
 package logger
 
-type loggerInitParams struct {
+type LoggerInitParams struct {
 	Severity       float64
 	UniqueIDPrefix string
 	Version        string
@@ -8,13 +8,13 @@ type loggerInitParams struct {
 	View           loggerView
 }
 
-func (t *loggerInitParams) fixSeverity() {
+func (t *LoggerInitParams) fixSeverity() {
 	if t.Severity < 0 || t.Severity > 7 {
 		t.Severity = 0
 	}
 }
 
-func (t *loggerInitParams) fillSeverity(loggers loggerTransmissions) {
+func (t *LoggerInitParams) fillSeverity(loggers loggerTransmissions) {
 	t.fixSeverity()
 	_severity := int(t.Severity)
 

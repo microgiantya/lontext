@@ -48,7 +48,7 @@ func switchStdOut() (err error) {
 func Test1(t *testing.T) {
 	_ = switchStdOut()
 
-	ctx, cancel := NewLoggerWithCancel(&loggerInitParams{
+	ctx, cancel := NewLoggerWithCancel(&LoggerInitParams{
 		Severity: 7,
 	})
 	ctx.LogError("log message")
@@ -61,7 +61,7 @@ func Test1(t *testing.T) {
 func Test2(t *testing.T) {
 	_ = switchStdOut()
 
-	ctx, cancel := NewLoggerWithCancel(&loggerInitParams{
+	ctx, cancel := NewLoggerWithCancel(&LoggerInitParams{
 		Severity:       7,
 		UniqueIDPrefix: "api",
 	})
