@@ -2,7 +2,6 @@ package logger
 
 import (
 	"context"
-	"fmt"
 	"testing"
 	"time"
 )
@@ -151,7 +150,6 @@ func TestNewDefaultLoggerWithCancel(t *testing.T) {
 	ctx3 = NewCommonLoggerContext(context.Background(), &loggerInitParams{
 		UniqueIDPrefix: "default",
 	})
-	fmt.Printf("%+v\n", *ctx3)
 	ctx3.LogEmergency("message")
 	ctx3.LogAlert("message")
 	ctx3.LogCritical("message")
@@ -171,12 +169,11 @@ func TestNewDefaultLoggerWithCancel(t *testing.T) {
 	ctx3.LogNotice("message")
 	ctx3.LogInformational("message")
 	ctx3.LogDebug("message")
-	fmt.Println("ctx4 >")
+
 	ctx4 = NewCommonLoggerContext(context.Background(), &loggerInitParams{
 		UniqueIDPrefix: "test",
 	})
-	fmt.Println("< ctx4")
-	fmt.Printf("%+v\n", *ctx4)
+
 	ctx4.LogEmergency("message")
 	ctx4.LogAlert("message")
 	ctx4.LogCritical("message")

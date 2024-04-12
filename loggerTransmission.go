@@ -1,7 +1,5 @@
 package logger
 
-import "fmt"
-
 var (
 	commonLoggerTransmissions loggerTransmissions
 )
@@ -21,7 +19,6 @@ func (t *loggerTransmission) doTransmission(v loggerData) {
 type loggerTransmissions []*loggerTransmission
 
 func newLoggerTransmissions(separate bool, veiw loggerView) (loggerTransmissions loggerTransmissions, needStart bool) {
-	fmt.Println("new transmission")
 	switch separate {
 	case true:
 		for i := 0; i < 8; i++ {

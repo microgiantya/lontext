@@ -47,15 +47,18 @@ func fixView(view loggerView) (fixedView loggerView) {
 
 func newLogger(ctx context.Context, params *loggerInitParams) (logger *Logger) {
 	params.View = fixView(params.View)
+	params.Version = fixVersion(params.Version)
+	params.UniqueIDPrefix = fixUniqueIDPrefix(params.UniqueIDPrefix)
+
 	loggers, needStart := newLoggerTransmissions(params.separate, params.View)
 	params.fillSeverity(loggers)
 
 	logger = &Logger{
 		ctx:            ctx,
-		uniqueIDPrefix: fixUniqueIDPrefix(params.UniqueIDPrefix),
+		uniqueIDPrefix: params.UniqueIDPrefix,
 		loggers:        loggers,
-		channels:       newLoggerDataChannels(),
-		version:        fixVersion(params.Version),
+		channels:       newLoggerDataChannels(params.separate),
+		version:        params.Version,
 		view:           params.View,
 	}
 
@@ -66,7 +69,6 @@ func newLogger(ctx context.Context, params *loggerInitParams) (logger *Logger) {
 		go logger.receive()
 		logger.wg.Wait()
 	}
-	fmt.Println("check")
 	return
 }
 
@@ -162,8 +164,6 @@ func (t *Logger) Value(v any) any {
 }
 
 func (t *Logger) receive() {
-	fmt.Println("start receive")
-	defer fmt.Println("stop receive")
 	t.wg.Done()
 	for {
 		select {
