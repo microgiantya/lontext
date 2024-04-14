@@ -230,5 +230,8 @@ func (t *Logger) receive() {
 }
 
 func (t *Logger) Close() {
-	t.chanClose <- struct{}{}
+	if t.chanClose != nil {
+		t.chanClose <- struct{}{}
+		return
+	}
 }
