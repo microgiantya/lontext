@@ -234,5 +234,4 @@ func (t *Logger) Close() {
 		t.chanClose <- struct{}{}
 		return
 	}
-	t.LogAlert("call close on nil cahnnel")
 }
