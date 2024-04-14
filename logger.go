@@ -2,7 +2,6 @@ package logger
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"path"
 	"runtime"
@@ -139,8 +138,6 @@ func (t *Logger) IncrementUniqueID() {
 }
 
 func (t *Logger) log(severity int, data interface{}) {
-	_data, _ := json.Marshal(data)
-
 	var fileName string
 	_, file, line, ok := runtime.Caller(2)
 	if ok {
@@ -152,7 +149,7 @@ func (t *Logger) log(severity int, data interface{}) {
 		fileLineNum: fmt.Sprint(line),
 		severity:    severity,
 		uniqueID:    fmt.Sprintf("%s-%08X", t.uniqueIDPrefix, uint32(t.uniqueID.Load())),
-		data:        string(_data),
+		data:        data,
 		version:     t.version,
 		view:        t.view,
 	}
