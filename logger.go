@@ -19,6 +19,7 @@ type Logger struct {
 	channels       loggerDataChannels
 	version        string
 	view           loggerView
+	chanClose      chan struct{}
 }
 
 func fixUniqueIDPrefix(uniqueIDPrefix string) (fixedUniqueIDPrefix string) {
@@ -72,35 +73,63 @@ func newLogger(ctx context.Context, params *LoggerInitParams) (logger *Logger) {
 	return
 }
 
-func NewLoggerWithCancel(params *LoggerInitParams) (logger *Logger, cancel context.CancelFunc) {
-	params.separate = true
+// Close() method used to close Logger receiver
+func NewCommonLogger(params *LoggerInitParams) (logger *Logger) {
+	logger = newLogger(context.Background(), params)
+	logger.chanClose = make(chan struct{})
+	return
+}
+
+// Done() method used to close Logger receiver
+func NewCommonLoggerWithCancel(params *LoggerInitParams) (logger *Logger, cancel context.CancelFunc) {
 	ctx, cancel := context.WithCancel(context.Background())
 	logger = newLogger(ctx, params)
 	return
 }
 
-func NewLoggerContext(ctx context.Context, params *LoggerInitParams) *Logger {
-	params.separate = true
-	return newLogger(ctx, params)
+// Close() method used to close Logger receiver
+func NewCommonLoggerContext(ctx context.Context, params *LoggerInitParams) (logger *Logger) {
+	logger = newLogger(ctx, params)
+	logger.chanClose = make(chan struct{})
+	return
 }
 
-func NewLoggerContextWithCancel(ctx context.Context, params *LoggerInitParams) (logger *Logger, cancel context.CancelFunc) {
-	params.separate = true
+// Done() method used to close Logger receiver
+func NewCommonLoggerContextWithCancel(ctx context.Context, params *LoggerInitParams) (logger *Logger, cancel context.CancelFunc) {
 	_ctx, cancel := context.WithCancel(ctx)
 	logger = newLogger(_ctx, params)
 	return
 }
 
-func NewCommonLoggerWithCancel(params *LoggerInitParams) (*Logger, context.CancelFunc) {
-	ctx, cancel := context.WithCancel(context.Background())
-	return newLogger(ctx, params), cancel
+// Close() method used to close Logger receiver
+func NewLogger(params *LoggerInitParams) (logger *Logger) {
+	params.separate = true
+	logger = NewCommonLogger(params)
+	return
 }
 
-func NewCommonLoggerContext(ctx context.Context, params *LoggerInitParams) *Logger {
-	return newLogger(ctx, params)
+// Done() method used to close Logger receiver
+func NewLoggerWithCancel(params *LoggerInitParams) (logger *Logger, cancel context.CancelFunc) {
+	params.separate = true
+	logger, cancel = NewCommonLoggerWithCancel(params)
+	return
 }
 
-func (t *Logger) UpdateUniqueID() {
+// Close() method used to close Logger receiver
+func NewLoggerContext(ctx context.Context, params *LoggerInitParams) (logger *Logger) {
+	params.separate = true
+	logger = NewCommonLoggerContext(ctx, params)
+	return
+}
+
+// Done() method used to close Logger receiver
+func NewLoggerContextWithCancel(ctx context.Context, params *LoggerInitParams) (logger *Logger, cancel context.CancelFunc) {
+	params.separate = true
+	logger, cancel = NewCommonLoggerContextWithCancel(ctx, params)
+	return
+}
+
+func (t *Logger) IncrementUniqueID() {
 	t.uniqueID.Store(getLoggerUniqueIDFromCache(t.uniqueIDPrefix))
 }
 
@@ -191,7 +220,15 @@ func (t *Logger) receive() {
 		case v := <-t.channels[7]:
 			t.loggers[7].doTransmission(v)
 		case <-t.ctx.Done():
+			if t.chanClose == nil {
+				return
+			}
+		case <-t.chanClose:
 			return
 		}
 	}
+}
+
+func (t *Logger) Close() {
+	t.chanClose <- struct{}{}
 }

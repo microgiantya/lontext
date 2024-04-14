@@ -4,8 +4,8 @@ type LoggerInitParams struct {
 	Severity       float64
 	UniqueIDPrefix string
 	Version        string
-	separate       bool
 	View           loggerView
+	separate       bool
 }
 
 func (t *LoggerInitParams) fixSeverity() {
