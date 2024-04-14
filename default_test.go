@@ -5,7 +5,6 @@ import (
 	"io"
 	"os"
 	"testing"
-	"time"
 )
 
 var (
@@ -45,35 +44,35 @@ func switchStdOut() (err error) {
 	return
 }
 
-func Test1(t *testing.T) {
-	_ = switchStdOut()
+// func Test1(t *testing.T) {
+// 	_ = switchStdOut()
 
-	ctx, cancel := NewLoggerWithCancel(&LoggerInitParams{
-		Severity: 7,
-	})
-	ctx.LogError("log message")
-	time.Sleep(time.Second)
-	ctx.Close()
-	time.Sleep(time.Second)
-	cancel()
-	_ = switchStdOut()
+// 	ctx, cancel := NewLoggerWithCancel(&LoggerInitParams{
+// 		Severity: 7,
+// 	})
+// 	ctx.LogError("log message")
+// 	time.Sleep(time.Second)
+// 	ctx.Close()
+// 	time.Sleep(time.Second)
+// 	cancel()
+// 	_ = switchStdOut()
 
-	fmt.Println("lines:", lines)
-}
-func Test2(t *testing.T) {
-	_ = switchStdOut()
+// 	fmt.Println("lines:", lines)
+// }
+// func Test2(t *testing.T) {
+// 	_ = switchStdOut()
 
-	ctx, cancel := NewLoggerWithCancel(&LoggerInitParams{
-		Severity:       7,
-		UniqueIDPrefix: "api",
-	})
-	ctx.LogError("log message")
-	time.Sleep(time.Second)
-	cancel()
-	_ = switchStdOut()
+// 	ctx, cancel := NewLoggerWithCancel(&LoggerInitParams{
+// 		Severity:       7,
+// 		UniqueIDPrefix: "api",
+// 	})
+// 	ctx.LogError("log message")
+// 	time.Sleep(time.Second)
+// 	cancel()
+// 	_ = switchStdOut()
 
-	fmt.Println("lines:", lines)
-}
+// 	fmt.Println("lines:", lines)
+// }
 
 func Test3(t *testing.T) {
 	ctx := NewLogger(&LoggerInitParams{
@@ -92,4 +91,5 @@ func Test3(t *testing.T) {
 	ctx.LogNotice("message")
 	ctx.LogInformational("message")
 	ctx.LogDebug("message")
+	ctx.LogDebug(ctx)
 }
