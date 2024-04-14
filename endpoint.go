@@ -44,7 +44,6 @@ func viewPlain(v loggerData) (logLine string) {
 	default:
 		logLine = fmt.Sprintf(loggerCommonFormatUniqueID, v.version, _loggerStaff[v.severity].color, _loggerStaff[v.severity].severity, v.uniqueID, v.fileName, v.fileLineNum, s, _loggerStaff[8].color)
 	}
-
 	return
 }
 
@@ -69,23 +68,19 @@ func viewJSON(v loggerData) (logLine string) {
 	var loggerViewJSONType = loggerViewJSONType{}
 	switch v.uniqueID {
 	case "":
-		loggerViewJSONType.Version = v.version
-		loggerViewJSONType.Severity = _loggerStaff[v.severity].severity
-		loggerViewJSONType.FileName = v.fileName
-		loggerViewJSONType.FileLineNum = v.fileLineNum
-		loggerViewJSONType.Message = message
 	default:
-		loggerViewJSONType.Version = v.version
-		loggerViewJSONType.Severity = _loggerStaff[v.severity].severity
 		loggerViewJSONType.UniqieID = v.uniqueID
-		loggerViewJSONType.FileName = v.fileName
-		loggerViewJSONType.FileLineNum = v.fileLineNum
-		loggerViewJSONType.Message = message
+
 	}
+	loggerViewJSONType.Version = v.version
+	loggerViewJSONType.Severity = _loggerStaff[v.severity].severity
+	loggerViewJSONType.UniqieID = v.uniqueID
+	loggerViewJSONType.FileName = v.fileName
+	loggerViewJSONType.FileLineNum = v.fileLineNum
+	loggerViewJSONType.Message = message
 
 	logLineBytes, _ := json.Marshal(loggerViewJSONType)
 
 	logLine = string(logLineBytes)
-
 	return
 }

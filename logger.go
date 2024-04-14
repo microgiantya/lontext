@@ -65,6 +65,10 @@ func newLogger(ctx context.Context, params *LoggerInitParams) (logger *Logger) {
 
 	logger.uniqueID.Store(getLoggerUniqueIDFromCache(logger.uniqueIDPrefix))
 
+	if params.needChanClose {
+		logger.chanClose = make(chan struct{})
+	}
+
 	if needStart {
 		logger.wg.Add(1)
 		go logger.receive()
@@ -75,8 +79,8 @@ func newLogger(ctx context.Context, params *LoggerInitParams) (logger *Logger) {
 
 // Close() method used to close Logger receiver
 func NewCommonLogger(params *LoggerInitParams) (logger *Logger) {
+	params.needChanClose = true
 	logger = newLogger(context.Background(), params)
-	logger.chanClose = make(chan struct{})
 	return
 }
 
@@ -89,8 +93,8 @@ func NewCommonLoggerWithCancel(params *LoggerInitParams) (logger *Logger, cancel
 
 // Close() method used to close Logger receiver
 func NewCommonLoggerContext(ctx context.Context, params *LoggerInitParams) (logger *Logger) {
+	params.needChanClose = true
 	logger = newLogger(ctx, params)
-	logger.chanClose = make(chan struct{})
 	return
 }
 

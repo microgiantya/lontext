@@ -6,6 +6,7 @@ type LoggerInitParams struct {
 	Version        string
 	View           loggerView
 	separate       bool
+	needChanClose  bool
 }
 
 func (t *LoggerInitParams) fixSeverity() {
