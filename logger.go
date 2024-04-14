@@ -8,8 +8,6 @@ import (
 	"sync"
 	"sync/atomic"
 	"time"
-
-	"github.com/LastPossum/kamino"
 )
 
 type Logger struct {
@@ -140,7 +138,8 @@ func (t *Logger) IncrementUniqueID() {
 }
 
 func (t *Logger) log(severity int, data interface{}) {
-	_data, _ := kamino.Clone(data)
+	t.wg.Add(1)
+	//_data, _ := kamino.Clone(data)
 	var fileName string
 	_, file, line, ok := runtime.Caller(2)
 	if ok {
@@ -152,7 +151,7 @@ func (t *Logger) log(severity int, data interface{}) {
 		fileLineNum: fmt.Sprint(line),
 		severity:    severity,
 		uniqueID:    fmt.Sprintf("%s-%08X", t.uniqueIDPrefix, uint32(t.uniqueID.Load())),
-		data:        _data,
+		data:        data,
 		version:     t.version,
 		view:        t.view,
 	}
@@ -212,20 +211,28 @@ func (t *Logger) receive() {
 		select {
 		case v := <-t.channels[0]:
 			t.loggers[0].doTransmission(v)
+			t.wg.Done()
 		case v := <-t.channels[1]:
 			t.loggers[1].doTransmission(v)
+			t.wg.Done()
 		case v := <-t.channels[2]:
 			t.loggers[2].doTransmission(v)
+			t.wg.Done()
 		case v := <-t.channels[3]:
 			t.loggers[3].doTransmission(v)
+			t.wg.Done()
 		case v := <-t.channels[4]:
 			t.loggers[4].doTransmission(v)
+			t.wg.Done()
 		case v := <-t.channels[5]:
 			t.loggers[5].doTransmission(v)
+			t.wg.Done()
 		case v := <-t.channels[6]:
 			t.loggers[6].doTransmission(v)
+			t.wg.Done()
 		case v := <-t.channels[7]:
 			t.loggers[7].doTransmission(v)
+			t.wg.Done()
 		case <-t.ctx.Done():
 			if t.chanClose == nil {
 				return
