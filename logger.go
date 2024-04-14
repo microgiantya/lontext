@@ -152,7 +152,7 @@ func (t *Logger) log(severity int, data interface{}) {
 		fileLineNum: fmt.Sprint(line),
 		severity:    severity,
 		uniqueID:    fmt.Sprintf("%s-%08X", t.uniqueIDPrefix, uint32(t.uniqueID.Load())),
-		data:        _data,
+		data:        string(_data),
 		version:     t.version,
 		view:        t.view,
 	}
