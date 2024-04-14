@@ -2,9 +2,9 @@ package logger
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"path"
-	"reflect"
 	"runtime"
 	"sync"
 	"sync/atomic"
@@ -139,7 +139,7 @@ func (t *Logger) IncrementUniqueID() {
 }
 
 func (t *Logger) log(severity int, data interface{}) {
-	_data := reflect.Indirect(reflect.ValueOf(data))
+	_data, _ := json.Marshal(data)
 
 	var fileName string
 	_, file, line, ok := runtime.Caller(2)
