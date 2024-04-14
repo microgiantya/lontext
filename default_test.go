@@ -74,3 +74,22 @@ func Test2(t *testing.T) {
 
 	fmt.Println("lines:", lines)
 }
+
+func Test3(t *testing.T) {
+	ctx := NewLogger(&LoggerInitParams{
+		Severity:       7,
+		UniqueIDPrefix: "apiV2",
+		View:           LoggerViewJSON,
+	})
+	ctx.LogEmergency("message")
+	ctx.LogAlert("message")
+	ctx.LogCritical("message")
+	ctx.LogError("message")
+
+	ctx.IncrementUniqueID()
+
+	ctx.LogWarning("message")
+	ctx.LogNotice("message")
+	ctx.LogInformational("message")
+	ctx.LogDebug("message")
+}
