@@ -7,8 +7,10 @@ import (
 )
 
 const (
-	loggerCommonFormat         = "%s %s% 13s %s:%s %s%s"
-	loggerCommonFormatUniqueID = "%s %s% 13s [%s] %s:%s %s%s"
+	fileNameLenLimit           = 14
+	lineNumLenLimit            = 4
+	loggerCommonFormat         = "%s %s% 13s %14s:%-4s %s%s"
+	loggerCommonFormatUniqueID = "%s %s% 13s [%s] %14s:%-4s %s%s"
 )
 
 var (
@@ -25,7 +27,12 @@ var (
 	dropLogLine = func(_ loggerData) {}
 )
 
-func viewCommon(v loggerData) (logLine string) {
+func cutFileName(fileName string) (cuttedFileName string) {
+	if len(fileName) > fileNameLenLimit {
+		cuttedFileName = fmt.Sprintf("~%s", fileName[len(fileName)-fileNameLenLimit+1:])
+		return
+	}
+	cuttedFileName = fileName
 	return
 }
 
@@ -47,14 +54,15 @@ func viewPlain(v loggerData) (logLines []string) {
 		messageRaw = fmt.Sprintf("%+v", v.data)
 	}
 
+	cuttedFileName := cutFileName(v.fileName)
 	switch v.uniqueID {
 	case "":
 		for _, logLine := range strings.Split(messageRaw, "\n") {
-			logLines = append(logLines, fmt.Sprintf(loggerCommonFormat, v.version, _loggerStaff[v.severity].color, _loggerStaff[v.severity].severity, v.fileName, v.fileLineNum, logLine, _loggerStaff[8].color))
+			logLines = append(logLines, fmt.Sprintf(loggerCommonFormat, v.version, _loggerStaff[v.severity].color, _loggerStaff[v.severity].severity, cuttedFileName, v.fileLineNum, logLine, _loggerStaff[8].color))
 		}
 	default:
 		for _, logLine := range strings.Split(messageRaw, "\n") {
-			logLines = append(logLines, fmt.Sprintf(loggerCommonFormatUniqueID, v.version, _loggerStaff[v.severity].color, _loggerStaff[v.severity].severity, v.uniqueID, v.fileName, v.fileLineNum, logLine, _loggerStaff[8].color))
+			logLines = append(logLines, fmt.Sprintf(loggerCommonFormatUniqueID, v.version, _loggerStaff[v.severity].color, _loggerStaff[v.severity].severity, v.uniqueID, cuttedFileName, v.fileLineNum, logLine, _loggerStaff[8].color))
 		}
 	}
 	return

@@ -78,7 +78,7 @@ func Test3(t *testing.T) {
 	ctx := NewLogger(&LoggerInitParams{
 		Severity:       7,
 		UniqueIDPrefix: "apiV2",
-		View:           LoggerViewJSON,
+		//View:           LoggerViewJSON,
 	})
 	ctx.LogEmergency(`
 SELECT ALL
@@ -96,5 +96,4 @@ LIMIT 10
 	ctx.LogNotice("message")
 	ctx.LogInformational("message")
 	ctx.LogDebug("message")
-	ctx.LogDebug(ctx)
 }
