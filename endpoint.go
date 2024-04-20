@@ -3,6 +3,7 @@ package logger
 import (
 	"encoding/json"
 	"fmt"
+	"strings"
 )
 
 const (
@@ -12,57 +13,69 @@ const (
 
 var (
 	showPlainLine = func(t loggerData) {
-		fmt.Println(viewPlain(t))
+		for _, line := range viewPlain(t) {
+			fmt.Println(line)
+		}
 	}
 	showJSONLine = func(t loggerData) {
-		fmt.Println(viewJSON(t))
+		for _, line := range viewJSON(t) {
+			fmt.Println(line)
+		}
 	}
 	dropLogLine = func(_ loggerData) {}
 )
 
-func viewPlain(v loggerData) (logLine string) {
-	var s string
+func viewCommon(v loggerData) (logLine string) {
+	return
+}
+
+func viewPlain(v loggerData) (logLines []string) {
+	var messageRaw string
 
 	switch t := v.data.(type) {
 	case error:
 		if t == nil {
 			return
 		}
-		s = t.Error()
+		messageRaw = t.Error()
 	case string:
 		if t == "" {
 			return
 		}
-		s = t
+		messageRaw = strings.Trim(t, "\n\t")
 	default:
-		s = fmt.Sprintf("%+v", v.data)
+		messageRaw = fmt.Sprintf("%+v", v.data)
 	}
 
 	switch v.uniqueID {
 	case "":
-		logLine = fmt.Sprintf(loggerCommonFormat, v.version, _loggerStaff[v.severity].color, _loggerStaff[v.severity].severity, v.fileName, v.fileLineNum, s, _loggerStaff[8].color)
+		for _, logLine := range strings.Split(messageRaw, "\n") {
+			logLines = append(logLines, fmt.Sprintf(loggerCommonFormat, v.version, _loggerStaff[v.severity].color, _loggerStaff[v.severity].severity, v.fileName, v.fileLineNum, logLine, _loggerStaff[8].color))
+		}
 	default:
-		logLine = fmt.Sprintf(loggerCommonFormatUniqueID, v.version, _loggerStaff[v.severity].color, _loggerStaff[v.severity].severity, v.uniqueID, v.fileName, v.fileLineNum, s, _loggerStaff[8].color)
+		for _, logLine := range strings.Split(messageRaw, "\n") {
+			logLines = append(logLines, fmt.Sprintf(loggerCommonFormatUniqueID, v.version, _loggerStaff[v.severity].color, _loggerStaff[v.severity].severity, v.uniqueID, v.fileName, v.fileLineNum, logLine, _loggerStaff[8].color))
+		}
 	}
 	return
 }
 
-func viewJSON(v loggerData) (logLine string) {
-	var message string
+func viewJSON(v loggerData) (logLines []string) {
+	var messageRaw string
 
 	switch t := v.data.(type) {
 	case error:
 		if t == nil {
 			return
 		}
-		message = t.Error()
+		messageRaw = t.Error()
 	case string:
 		if t == "" {
 			return
 		}
-		message = t
+		messageRaw = strings.Trim(t, "\n\t")
 	default:
-		message = fmt.Sprintf("%+v", v.data)
+		messageRaw = fmt.Sprintf("%+v", v.data)
 	}
 
 	var loggerViewJSONType = loggerViewJSONType{}
@@ -77,10 +90,10 @@ func viewJSON(v loggerData) (logLine string) {
 	loggerViewJSONType.UniqieID = v.uniqueID
 	loggerViewJSONType.FileName = v.fileName
 	loggerViewJSONType.FileLineNum = v.fileLineNum
-	loggerViewJSONType.Message = message
+	loggerViewJSONType.Message = messageRaw
 
 	logLineBytes, _ := json.Marshal(loggerViewJSONType)
 
-	logLine = string(logLineBytes)
+	logLines = strings.Split(string(logLineBytes), "\n")
 	return
 }

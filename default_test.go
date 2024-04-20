@@ -80,7 +80,12 @@ func Test3(t *testing.T) {
 		UniqueIDPrefix: "apiV2",
 		View:           LoggerViewJSON,
 	})
-	ctx.LogEmergency("message")
+	ctx.LogEmergency(`
+SELECT ALL
+FROM TRATATA
+WHERE TURURU = 'PAPA'
+LIMIT 10
+`)
 	ctx.LogAlert("message")
 	ctx.LogCritical("message")
 	ctx.LogError("message")
