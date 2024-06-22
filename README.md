@@ -1,53 +1,54 @@
-# Logger
-## _Another go logger package_
-Logger package was inspired by asterisk PBX logger.
+###### Warning - antipattern content!!!
+
+# Ltx - _another go logger package_
+Ltx package was inspired by [Asterisk PBX](https://github.com/asterisk/asterisk) logger.
 
 ##### Features
-- Logger implements context.Context interface, which allow easy use it as logger and/or as Context
-- Common/separate settings for each Logger instance
+- Ltx extends [context.Context](https://pkg.go.dev/context#Context) implementation, which allow easy use it as logger and/or as [context.Context](https://pkg.go.dev/context#Context)
+- Common/separate settings for each Ltx instance
 - Auto/manual increment for "transaction" like based on prefix
 - Supported output formats plain and json
 - Colored output for plain logs (journalctl -a)
 
-##### Examples
-- Separate Logger instance with cancel (cancel() freeing Logger recources):
+##### Examples // TODO move to examples folder
+- Separate Ltx instance with cancel (cancel() freeing Ltx recources):
 ```go
-import "github.com/microgiantya/logger"
+import "github.com/microgiantya/ltx"
 ...
-ctx, cancel := logger.NewLoggerWithCancel(&LoggerInitParams{
+ltx, cancel := ltx.NewLtxWithCancel(&LtxInitParams{
 	Severity: 7,
 })
 defer cancel()
 ```
 
-- Separate Logger instance (Close() freeing Logger recources):
+- Separate Ltx instance (Close() freeing Ltx resources):
 ```go
-import "github.com/microgiantya/logger"
+import "github.com/microgiantya/ltx"
 ...
-ctx := logger.NewLogger(&LoggerInitParams{
+ltx := ltx.NewLtx(&LtxInitParams{
 	Severity: 7,
 })
-defer ctx.Close()
+defer ltx.Close()
 ```
 
 - Plain output:
 ```go
 ...
-ctx := NewLogger(&LoggerInitParams{
+ltx := NewLtx(&LtxInitParams{
 		Severity:       7,
 		UniqueIDPrefix: "apiV1",
 })
-ctx.LogEmergency("message")
-ctx.LogAlert("message")
-ctx.LogCritical("message")
-ctx.LogError("message")
+ltx.LogEmergency("message")
+ltx.LogAlert("message")
+ltx.LogCritical("message")
+ltx.LogError("message")
 
-ctx.IncrementUniqueID()
+ltx.IncrementUniqueID()
 
-ctx.LogWarning("message")
-ctx.LogNotice("message")
-ctx.LogInformational("message")
-ctx.LogDebug("message")
+ltx.LogWarning("message")
+ltx.LogNotice("message")
+ltx.LogInformational("message")
+ltx.LogDebug("message")
 ```
 
 ```
@@ -64,22 +65,22 @@ v0.0.0         DEBUG [apiV1-00000001] default_test.go:93 message
 - JSON output:
 ```go
 ...
-ctx := NewLogger(&LoggerInitParams{
+ltx := NewLtx(&LtxInitParams{
 	Severity:       7,
 	UniqueIDPrefix: "apiV2",
 	View:           LoggerViewJSON,
 })
-ctx.LogEmergency("message")
-ctx.LogAlert("message")
-ctx.LogCritical("message")
-ctx.LogError("message")
+ltx.LogEmergency("message")
+ltx.LogAlert("message")
+ltx.LogCritical("message")
+ltx.LogError("message")
 
-ctx.IncrementUniqueID()
+ltx.IncrementUniqueID()
 
-ctx.LogWarning("message")
-ctx.LogNotice("message")
-ctx.LogInformational("message")
-ctx.LogDebug("message")
+ltx.LogWarning("message")
+ltx.LogNotice("message")
+ltx.LogInformational("message")
+ltx.LogDebug("message")
 ```
 
 ```
