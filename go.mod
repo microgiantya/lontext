@@ -1,3 +1,3 @@
-module github.com/microgiantya/logger
+module github.com/microgiantya/lontext
 
-go 1.21.1
+go 1.22

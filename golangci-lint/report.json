@@ -1,0 +1,933 @@
+{
+  "Issues": [
+    {
+      "FromLinter": "nolintlint",
+      "Text": "directive `// nolint` should be written without leading space as `//nolint`",
+      "Severity": "error",
+      "SourceLines": [
+        "// nolint"
+      ],
+      "Replacement": {
+        "NeedOnlyDelete": false,
+        "NewLines": null,
+        "Inline": {
+          "StartCol": 2,
+          "Length": 1,
+          "NewString": ""
+        }
+      },
+      "Pos": {
+        "Filename": "pkg/default_test.go",
+        "Offset": 0,
+        "Line": 1,
+        "Column": 1
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "gocritic",
+      "Text": "hugeParam: v is heavy (104 bytes); consider passing it by pointer",
+      "Severity": "error",
+      "SourceLines": [
+        "func viewPlain(v ltxData) (logLines []string) {"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "pkg/endpoint.go",
+        "Offset": 725,
+        "Line": 39,
+        "Column": 16
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "gocritic",
+      "Text": "hugeParam: v is heavy (104 bytes); consider passing it by pointer",
+      "Severity": "error",
+      "SourceLines": [
+        "func viewJSON(v ltxData) (logLines []string) {"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "pkg/endpoint.go",
+        "Offset": 1743,
+        "Line": 90,
+        "Column": 15
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "stylecheck",
+      "Text": "ST1020: comment on exported function NewLontextCommon should be of the form \"NewLontextCommon ...\"",
+      "Severity": "error",
+      "SourceLines": [
+        "// Close() method used to close Lontext receiver."
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "pkg/ltx.go",
+        "Offset": 1525,
+        "Line": 80,
+        "Column": 1
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "stylecheck",
+      "Text": "ST1020: comment on exported function NewLontextCommonWithCancel should be of the form \"NewLontextCommonWithCancel ...\"",
+      "Severity": "error",
+      "SourceLines": [
+        "// Done() method used to close Lontext receiver."
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "pkg/ltx.go",
+        "Offset": 1736,
+        "Line": 87,
+        "Column": 1
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "stylecheck",
+      "Text": "ST1020: comment on exported function NewLontextCommonContext should be of the form \"NewLontextCommonContext ...\"",
+      "Severity": "error",
+      "SourceLines": [
+        "// Close() method used to close Lontext receiver."
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "pkg/ltx.go",
+        "Offset": 1994,
+        "Line": 94,
+        "Column": 1
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "stylecheck",
+      "Text": "ST1020: comment on exported function NewLontextCommonContextWithCancel should be of the form \"NewLontextCommonContextWithCancel ...\"",
+      "Severity": "error",
+      "SourceLines": [
+        "// Done() method used to close Lontext receiver."
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "pkg/ltx.go",
+        "Offset": 2216,
+        "Line": 101,
+        "Column": 1
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "lll",
+      "Text": "line is 130 characters",
+      "Severity": "error",
+      "SourceLines": [
+        "func NewLontextCommonContextWithCancel(ctx context.Context, params *LontextInitParams) (ltx *Lontext, cancel context.CancelFunc) {"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "pkg/ltx.go",
+        "Offset": 0,
+        "Line": 102,
+        "Column": 0
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "stylecheck",
+      "Text": "ST1020: comment on exported function NewLontext should be of the form \"NewLontext ...\"",
+      "Severity": "error",
+      "SourceLines": [
+        "// Close() method used to close Lontext receiver."
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "pkg/ltx.go",
+        "Offset": 2487,
+        "Line": 108,
+        "Column": 1
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "stylecheck",
+      "Text": "ST1020: comment on exported function NewLontextWithCancel should be of the form \"NewLontextWithCancel ...\"",
+      "Severity": "error",
+      "SourceLines": [
+        "// Done() method used to close Lontext receiver."
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "pkg/ltx.go",
+        "Offset": 2664,
+        "Line": 115,
+        "Column": 1
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "stylecheck",
+      "Text": "ST1020: comment on exported function NewLontextContext should be of the form \"NewLontextContext ...\"",
+      "Severity": "error",
+      "SourceLines": [
+        "// Close() method used to close Lontext receiver."
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "pkg/ltx.go",
+        "Offset": 2895,
+        "Line": 122,
+        "Column": 1
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "stylecheck",
+      "Text": "ST1020: comment on exported function NewLontextContextWithCancel should be of the form \"NewLontextContextWithCancel ...\"",
+      "Severity": "error",
+      "SourceLines": [
+        "// Done() method used to close Lontext receiver."
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "pkg/ltx.go",
+        "Offset": 3112,
+        "Line": 129,
+        "Column": 1
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "lll",
+      "Text": "line is 124 characters",
+      "Severity": "error",
+      "SourceLines": [
+        "func NewLontextContextWithCancel(ctx context.Context, params *LontextInitParams) (ltx *Lontext, cancel context.CancelFunc) {"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "pkg/ltx.go",
+        "Offset": 0,
+        "Line": 130,
+        "Column": 0
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "gomnd",
+      "Text": "mnd: Magic number: 2, in <argument> detected",
+      "Severity": "error",
+      "SourceLines": [
+        "\t_, file, line, ok := runtime.Caller(2)"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "pkg/ltx.go",
+        "Offset": 3599,
+        "Line": 142,
+        "Column": 38
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "perfsprint",
+      "Text": "fmt.Sprint can be replaced with faster strconv.Itoa",
+      "Severity": "error",
+      "SourceLines": [
+        "\t\tfileLineNum: fmt.Sprint(line),"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "pkg/ltx.go",
+        "Offset": 3718,
+        "Line": 149,
+        "Column": 16
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "gomnd",
+      "Text": "mnd: Magic number: 2, in <argument> detected",
+      "Severity": "error",
+      "SourceLines": [
+        "\tt.write(2, data)"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "pkg/ltx.go",
+        "Offset": 4103,
+        "Line": 167,
+        "Column": 10
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "gomnd",
+      "Text": "mnd: Magic number: 3, in <argument> detected",
+      "Severity": "error",
+      "SourceLines": [
+        "\tt.write(3, data)"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "pkg/ltx.go",
+        "Offset": 4168,
+        "Line": 171,
+        "Column": 10
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "gomnd",
+      "Text": "mnd: Magic number: 4, in <argument> detected",
+      "Severity": "error",
+      "SourceLines": [
+        "\tt.write(4, data)"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "pkg/ltx.go",
+        "Offset": 4235,
+        "Line": 175,
+        "Column": 10
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "gomnd",
+      "Text": "mnd: Magic number: 5, in <argument> detected",
+      "Severity": "error",
+      "SourceLines": [
+        "\tt.write(5, data)"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "pkg/ltx.go",
+        "Offset": 4301,
+        "Line": 179,
+        "Column": 10
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "gomnd",
+      "Text": "mnd: Magic number: 6, in <argument> detected",
+      "Severity": "error",
+      "SourceLines": [
+        "\tt.write(6, data)"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "pkg/ltx.go",
+        "Offset": 4374,
+        "Line": 183,
+        "Column": 10
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "gomnd",
+      "Text": "mnd: Magic number: 7, in <argument> detected",
+      "Severity": "error",
+      "SourceLines": [
+        "\tt.write(7, data)"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "pkg/ltx.go",
+        "Offset": 4439,
+        "Line": 187,
+        "Column": 10
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "wrapcheck",
+      "Text": "error returned from interface method should be wrapped: sig: func (context.Context).Err() error",
+      "Severity": "error",
+      "SourceLines": [
+        "\treturn t.ctx.Err()"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "pkg/ltx.go",
+        "Offset": 4647,
+        "Line": 199,
+        "Column": 9
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "intrange",
+      "Text": "for loop can be changed to use an integer range (Go 1.22+)",
+      "Severity": "error",
+      "SourceLines": [
+        "\t\tfor i := 0; i < 8; i++ {"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "pkg/ltxDataChannels.go",
+        "Offset": 218,
+        "Line": 12,
+        "Column": 3
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "intrange",
+      "Text": "for loop can be changed to use an integer range (Go 1.22+)",
+      "Severity": "error",
+      "SourceLines": [
+        "\t\t\tfor i := 0; i < 8; i++ {"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "pkg/ltxDataChannels.go",
+        "Offset": 365,
+        "Line": 17,
+        "Column": 4
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "gocritic",
+      "Text": "hugeParam: v is heavy (104 bytes); consider passing it by pointer",
+      "Severity": "error",
+      "SourceLines": [
+        "func (t *ltxTransmission) doTransmission(v ltxData) {"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "pkg/ltxTransmission.go",
+        "Offset": 222,
+        "Line": 15,
+        "Column": 42
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "intrange",
+      "Text": "for loop can be changed to use an integer range (Go 1.22+)",
+      "Severity": "error",
+      "SourceLines": [
+        "\t\tfor i := 0; i < 8; i++ {"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "pkg/ltxTransmission.go",
+        "Offset": 433,
+        "Line": 24,
+        "Column": 3
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "whitespace",
+      "Text": "unnecessary trailing newline",
+      "Severity": "error",
+      "SourceLines": [
+        ""
+      ],
+      "Replacement": {
+        "NeedOnlyDelete": true,
+        "NewLines": null,
+        "Inline": null
+      },
+      "LineRange": {
+        "From": 31,
+        "To": 31
+      },
+      "Pos": {
+        "Filename": "pkg/ltxTransmission.go",
+        "Offset": 652,
+        "Line": 32,
+        "Column": 4
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "intrange",
+      "Text": "for loop can be changed to use an integer range (Go 1.22+)",
+      "Severity": "error",
+      "SourceLines": [
+        "\t\t\tfor i := 0; i < 8; i++ {"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "pkg/ltxTransmission.go",
+        "Offset": 844,
+        "Line": 39,
+        "Column": 4
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "forcetypeassert",
+      "Text": "type assertion must be checked",
+      "Severity": "error",
+      "SourceLines": [
+        "\t\tuniqueID = rawUniqueID.(int64) + 1"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "pkg/ltxUniqueIDCache.go",
+        "Offset": 229,
+        "Line": 14,
+        "Column": 3
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    }
+  ],
+  "Report": {
+    "Linters": [
+      {
+        "Name": "asasalint",
+        "Enabled": true
+      },
+      {
+        "Name": "asciicheck",
+        "Enabled": true
+      },
+      {
+        "Name": "bidichk",
+        "Enabled": true
+      },
+      {
+        "Name": "bodyclose",
+        "Enabled": true
+      },
+      {
+        "Name": "containedctx",
+        "Enabled": true
+      },
+      {
+        "Name": "contextcheck"
+      },
+      {
+        "Name": "copyloopvar"
+      },
+      {
+        "Name": "cyclop"
+      },
+      {
+        "Name": "decorder"
+      },
+      {
+        "Name": "deadcode"
+      },
+      {
+        "Name": "depguard"
+      },
+      {
+        "Name": "dogsled"
+      },
+      {
+        "Name": "dupl",
+        "Enabled": true
+      },
+      {
+        "Name": "dupword",
+        "Enabled": true
+      },
+      {
+        "Name": "durationcheck",
+        "Enabled": true
+      },
+      {
+        "Name": "errcheck",
+        "Enabled": true,
+        "EnabledByDefault": true
+      },
+      {
+        "Name": "errchkjson"
+      },
+      {
+        "Name": "errname",
+        "Enabled": true
+      },
+      {
+        "Name": "errorlint",
+        "Enabled": true
+      },
+      {
+        "Name": "execinquery",
+        "Enabled": true
+      },
+      {
+        "Name": "exhaustive",
+        "Enabled": true
+      },
+      {
+        "Name": "exhaustivestruct"
+      },
+      {
+        "Name": "exhaustruct"
+      },
+      {
+        "Name": "exportloopref"
+      },
+      {
+        "Name": "forbidigo"
+      },
+      {
+        "Name": "forcetypeassert",
+        "Enabled": true
+      },
+      {
+        "Name": "funlen"
+      },
+      {
+        "Name": "gci"
+      },
+      {
+        "Name": "ginkgolinter"
+      },
+      {
+        "Name": "gocheckcompilerdirectives",
+        "Enabled": true
+      },
+      {
+        "Name": "gochecknoglobals"
+      },
+      {
+        "Name": "gochecknoinits"
+      },
+      {
+        "Name": "gochecksumtype"
+      },
+      {
+        "Name": "gocognit"
+      },
+      {
+        "Name": "goconst",
+        "Enabled": true
+      },
+      {
+        "Name": "gocritic",
+        "Enabled": true
+      },
+      {
+        "Name": "gocyclo"
+      },
+      {
+        "Name": "godot",
+        "Enabled": true
+      },
+      {
+        "Name": "godox"
+      },
+      {
+        "Name": "goerr113"
+      },
+      {
+        "Name": "gofmt",
+        "Enabled": true
+      },
+      {
+        "Name": "gofumpt"
+      },
+      {
+        "Name": "goheader"
+      },
+      {
+        "Name": "goimports",
+        "Enabled": true
+      },
+      {
+        "Name": "golint"
+      },
+      {
+        "Name": "gomnd",
+        "Enabled": true
+      },
+      {
+        "Name": "gomoddirectives"
+      },
+      {
+        "Name": "gomodguard"
+      },
+      {
+        "Name": "goprintffuncname",
+        "Enabled": true
+      },
+      {
+        "Name": "gosec",
+        "Enabled": true
+      },
+      {
+        "Name": "gosimple",
+        "Enabled": true,
+        "EnabledByDefault": true
+      },
+      {
+        "Name": "gosmopolitan"
+      },
+      {
+        "Name": "govet",
+        "Enabled": true,
+        "EnabledByDefault": true
+      },
+      {
+        "Name": "grouper",
+        "Enabled": true
+      },
+      {
+        "Name": "ifshort"
+      },
+      {
+        "Name": "importas"
+      },
+      {
+        "Name": "inamedparam"
+      },
+      {
+        "Name": "ineffassign",
+        "Enabled": true,
+        "EnabledByDefault": true
+      },
+      {
+        "Name": "interfacebloat"
+      },
+      {
+        "Name": "interfacer"
+      },
+      {
+        "Name": "intrange",
+        "Enabled": true
+      },
+      {
+        "Name": "ireturn"
+      },
+      {
+        "Name": "lll",
+        "Enabled": true
+      },
+      {
+        "Name": "loggercheck",
+        "Enabled": true
+      },
+      {
+        "Name": "maintidx"
+      },
+      {
+        "Name": "makezero",
+        "Enabled": true
+      },
+      {
+        "Name": "maligned"
+      },
+      {
+        "Name": "mirror",
+        "Enabled": true
+      },
+      {
+        "Name": "misspell"
+      },
+      {
+        "Name": "musttag",
+        "Enabled": true
+      },
+      {
+        "Name": "nakedret"
+      },
+      {
+        "Name": "nestif"
+      },
+      {
+        "Name": "nilerr",
+        "Enabled": true
+      },
+      {
+        "Name": "nilnil",
+        "Enabled": true
+      },
+      {
+        "Name": "nlreturn"
+      },
+      {
+        "Name": "noctx"
+      },
+      {
+        "Name": "nonamedreturns"
+      },
+      {
+        "Name": "nosnakecase"
+      },
+      {
+        "Name": "nosprintfhostport",
+        "Enabled": true
+      },
+      {
+        "Name": "paralleltest"
+      },
+      {
+        "Name": "perfsprint",
+        "Enabled": true
+      },
+      {
+        "Name": "prealloc",
+        "Enabled": true
+      },
+      {
+        "Name": "predeclared",
+        "Enabled": true
+      },
+      {
+        "Name": "promlinter"
+      },
+      {
+        "Name": "protogetter",
+        "Enabled": true
+      },
+      {
+        "Name": "reassign",
+        "Enabled": true
+      },
+      {
+        "Name": "revive",
+        "Enabled": true
+      },
+      {
+        "Name": "rowserrcheck",
+        "Enabled": true
+      },
+      {
+        "Name": "sloglint",
+        "Enabled": true
+      },
+      {
+        "Name": "scopelint"
+      },
+      {
+        "Name": "sqlclosecheck",
+        "Enabled": true
+      },
+      {
+        "Name": "spancheck"
+      },
+      {
+        "Name": "staticcheck",
+        "Enabled": true,
+        "EnabledByDefault": true
+      },
+      {
+        "Name": "structcheck"
+      },
+      {
+        "Name": "stylecheck",
+        "Enabled": true
+      },
+      {
+        "Name": "tagalign"
+      },
+      {
+        "Name": "tagliatelle"
+      },
+      {
+        "Name": "tenv",
+        "Enabled": true
+      },
+      {
+        "Name": "testableexamples",
+        "Enabled": true
+      },
+      {
+        "Name": "testifylint"
+      },
+      {
+        "Name": "testpackage"
+      },
+      {
+        "Name": "thelper",
+        "Enabled": true
+      },
+      {
+        "Name": "tparallel",
+        "Enabled": true
+      },
+      {
+        "Name": "typecheck",
+        "Enabled": true,
+        "EnabledByDefault": true
+      },
+      {
+        "Name": "unconvert",
+        "Enabled": true
+      },
+      {
+        "Name": "unparam",
+        "Enabled": true
+      },
+      {
+        "Name": "unused",
+        "Enabled": true,
+        "EnabledByDefault": true
+      },
+      {
+        "Name": "usestdlibvars",
+        "Enabled": true
+      },
+      {
+        "Name": "varcheck"
+      },
+      {
+        "Name": "varnamelen"
+      },
+      {
+        "Name": "wastedassign",
+        "Enabled": true
+      },
+      {
+        "Name": "whitespace",
+        "Enabled": true
+      },
+      {
+        "Name": "wrapcheck",
+        "Enabled": true
+      },
+      {
+        "Name": "wsl"
+      },
+      {
+        "Name": "zerologlint",
+        "Enabled": true
+      },
+      {
+        "Name": "nolintlint",
+        "Enabled": true
+      }
+    ]
+  }
+}

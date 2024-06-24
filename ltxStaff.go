@@ -1,7 +1,7 @@
-package logger
+package lontext
 
 var (
-	_loggerStaff = map[int]*loggerStaff{
+	_ltxStaff = map[int]*ltxStaff{
 		0: {severity: "EMERGENCY", color: "\033[38;1m"},
 		1: {severity: "ALERT", color: "\033[37;1m"},
 		2: {severity: "CRITICAL", color: "\033[31;1m"},
@@ -14,7 +14,7 @@ var (
 	}
 )
 
-type loggerStaff struct {
+type ltxStaff struct {
 	severity string
 	color    string
 }

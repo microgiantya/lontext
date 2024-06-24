@@ -1,31 +1,31 @@
 ###### Warning - antipattern content!!!
 
-# Ltx - _another go logger package_
-Ltx package was inspired by [Asterisk PBX](https://github.com/asterisk/asterisk) logger.
+# Lontext is _another go logger package_
+Lontext package was inspired by [Asterisk PBX](https://github.com/asterisk/asterisk) logger.
 
 ##### Features
-- Ltx extends [context.Context](https://pkg.go.dev/context#Context) implementation, which allow easy use it as logger and/or as [context.Context](https://pkg.go.dev/context#Context)
-- Common/separate settings for each Ltx instance
+- Lontext extends [context.Context](https://pkg.go.dev/context#Context) implementation, which allow easy use it as ltx and/or as [context.Context](https://pkg.go.dev/context#Context)
+- Common/separate settings for each Lontext instance
 - Auto/manual increment for "transaction" like based on prefix
 - Supported output formats plain and json
 - Colored output for plain logs (journalctl -a)
 
 ##### Examples // TODO move to examples folder
-- Separate Ltx instance with cancel (cancel() freeing Ltx recources):
+- Separate Lontext instance with cancel (cancel() freeing Lontext recources):
 ```go
 import "github.com/microgiantya/ltx"
 ...
-ltx, cancel := ltx.NewLtxWithCancel(&LtxInitParams{
+ltx, cancel := ltx.NewLontextWithCancel(&LontextInitParams{
 	Severity: 7,
 })
 defer cancel()
 ```
 
-- Separate Ltx instance (Close() freeing Ltx resources):
+- Separate Lontext instance (Close() freeing Lontext resources):
 ```go
 import "github.com/microgiantya/ltx"
 ...
-ltx := ltx.NewLtx(&LtxInitParams{
+ltx := ltx.NewLontext(&LontextInitParams{
 	Severity: 7,
 })
 defer ltx.Close()
@@ -34,7 +34,7 @@ defer ltx.Close()
 - Plain output:
 ```go
 ...
-ltx := NewLtx(&LtxInitParams{
+ltx := NewLontext(&LontextInitParams{
 		Severity:       7,
 		UniqueIDPrefix: "apiV1",
 })
@@ -65,10 +65,10 @@ v0.0.0         DEBUG [apiV1-00000001] default_test.go:93 message
 - JSON output:
 ```go
 ...
-ltx := NewLtx(&LtxInitParams{
+ltx := NewLontext(&LontextInitParams{
 	Severity:       7,
 	UniqueIDPrefix: "apiV2",
-	View:           LoggerViewJSON,
+	View:           LontextViewJSON,
 })
 ltx.LogEmergency("message")
 ltx.LogAlert("message")

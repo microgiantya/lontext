@@ -1,53 +1,51 @@
-package logger
+// nolint
+package lontext
 
 import (
-	"fmt"
-	"io"
-	"os"
 	"testing"
 )
 
-var (
-	defaultStdOut *os.File
-	pipeOut       *os.File
-	pipeIn        *os.File
-	set           bool
-	lines         []string
-)
+// var (
+// 	defaultStdOut *os.File
+// 	pipeOut       *os.File
+// 	pipeIn        *os.File
+// 	set           bool
+// 	lines         []string
+// )
 
-func switchStdOut() (err error) {
-	switch set {
-	case true:
-		os.Stdout = defaultStdOut
-		if pipeIn != nil && pipeOut != nil {
-			pipeIn.Close()
-			var bb []byte
-			bb, err = io.ReadAll(pipeOut)
-			if err != nil {
-				fmt.Println("readAll err:", err)
-				return
-			}
-			lines = append(lines, fmt.Sprintf("%q", bb))
-			pipeOut.Close()
-		}
-		set = false
-	default:
-		lines = []string{}
-		defaultStdOut = os.Stdout
-		pipeOut, pipeIn, err = os.Pipe()
-		if err != nil {
-			return
-		}
-		os.Stdout = pipeIn
-		set = true
-	}
-	return
-}
+// func switchStdOut() (err error) {
+// 	switch set {
+// 	case true:
+// 		os.Stdout = defaultStdOut
+// 		if pipeIn != nil && pipeOut != nil {
+// 			pipeIn.Close()
+// 			var bb []byte
+// 			bb, err = io.ReadAll(pipeOut)
+// 			if err != nil {
+// 				fmt.Println("readAll err:", err)
+// 				return
+// 			}
+// 			lines = append(lines, fmt.Sprintf("%q", bb))
+// 			pipeOut.Close()
+// 		}
+// 		set = false
+// 	default:
+// 		lines = []string{}
+// 		defaultStdOut = os.Stdout
+// 		pipeOut, pipeIn, err = os.Pipe()
+// 		if err != nil {
+// 			return
+// 		}
+// 		os.Stdout = pipeIn
+// 		set = true
+// 	}
+// 	return
+// }
 
 // func Test1(t *testing.T) {
 // 	_ = switchStdOut()
 
-// 	ctx, cancel := NewLoggerWithCancel(&LoggerInitParams{
+// 	ctx, cancel := NewLontextWithCancel(&LontextInitParams{
 // 		Severity: 7,
 // 	})
 // 	ctx.LogError("log message")
@@ -62,7 +60,7 @@ func switchStdOut() (err error) {
 // func Test2(t *testing.T) {
 // 	_ = switchStdOut()
 
-// 	ctx, cancel := NewLoggerWithCancel(&LoggerInitParams{
+// 	ctx, cancel := NewLontextWithCancel(&LontextInitParams{
 // 		Severity:       7,
 // 		UniqueIDPrefix: "api",
 // 	})
@@ -75,25 +73,25 @@ func switchStdOut() (err error) {
 // }
 
 func Test3(t *testing.T) {
-	ctx := NewLogger(&LoggerInitParams{
-		Severity:       7,
-		UniqueIDPrefix: "apiV2",
-		//View:           LoggerViewJSON,
+	ctx := NewLontext(&LontextInitParams{
+		Severity: 7,
+		Prefix:   "apiV2",
+		//View:           LontextViewJSON,
 	})
-	ctx.LogEmergency(`
+	ctx.Emergency(`
 SELECT ALL
 FROM TRATATA
 WHERE TURURU = 'PAPA'
 LIMIT 10
 `)
-	ctx.LogAlert("message")
-	ctx.LogCritical("message")
-	ctx.LogError("message")
+	ctx.Alert("message")
+	ctx.Critical("message")
+	ctx.Error("message")
 
 	ctx.IncrementUniqueID()
 
-	ctx.LogWarning("message")
-	ctx.LogNotice("message")
-	ctx.LogInformational("message")
-	ctx.LogDebug("message")
+	ctx.Warning("message")
+	ctx.Notice("message")
+	ctx.Informational("message")
+	ctx.Debug("message")
 }
