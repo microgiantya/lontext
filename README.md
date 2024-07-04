@@ -1,3 +1,5 @@
+[![go report card](https://goreportcard.com/badge/github.com/microgiantya/lontext "go report card")](https://goreportcard.com/report/github.com/microgiantya/lontext)
+
 # Logger
 ## _Another go logger package_
 Logger package was inspired by asterisk PBX logger.
