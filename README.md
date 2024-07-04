@@ -1,6 +1,7 @@
 [![go report card](https://goreportcard.com/badge/github.com/microgiantya/lontext "go report card")](https://goreportcard.com/report/github.com/microgiantya/lontext)
 [![MIT license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
-[![test status](https://github.com/microgiantya/lontext/workflows/tests/badge.svg?branch=main "test status")](https://github.com/microgiantya/lontext/actions)
+[![test status](https://github.com/microgiantya/lontext/workflows/tests/badge.svg?branch=main "test status")](https://github.com/microgiantya/lontext/actions) // TODO
+[![Go.Dev reference](https://img.shields.io/badge/pkg.go.dev-007d9c?logo=go&logoColor=white)](https://pkg.go.dev/github.com/microgiantya/lontext?tab=doc)
 
 # Logger
 ## _Another go logger package_
